@@ -1,0 +1,41 @@
+# Local development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+*.cache
+
+# Security files - ensure these are tracked
+!LICENSE
+!COPYRIGHT
+!TERMS_OF_USE.md
+!DMCA.md
+!README.md
+!robots.txt
+!.gitattributes
+!.gitignore
+!.nojekyll
+!.github/
+!.well-known/

@@ -1,0 +1,32 @@
+# Prevent certain Git operations
+* -export-ignore
+* -diff
+* -merge
+* -text
+
+# Mark all files as binary to prevent easy viewing
+* binary
+
+# Prevent Git LFS abuse
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.svg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+
+# Protect sensitive files
+*.obf.* -diff -merge
+obfuscate.py -diff -merge
+
+# Ensure security and legal files are tracked
+!COPYRIGHT
+!TERMS_OF_USE.md
+!DMCA.md
+!LICENSE
+!README.md
+!robots.txt
+!.gitattributes
+!.gitignore
+!.nojekyll
+!.github/
+!.well-known/

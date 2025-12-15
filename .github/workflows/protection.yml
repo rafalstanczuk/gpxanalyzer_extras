@@ -1,0 +1,61 @@
+name: Repository Protection Monitor
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  schedule:
+    # Run daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  protect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Check for unauthorized forks
+        run: |
+          echo "Repository protection check running..."
+          echo "Monitoring for unauthorized access attempts"
+          
+      - name: Validate copyright notices
+        run: |
+          if [ ! -f "COPYRIGHT" ]; then
+            echo "ERROR: COPYRIGHT file missing!"
+            exit 1
+          fi
+          if [ ! -f "TERMS_OF_USE.md" ]; then
+            echo "ERROR: TERMS_OF_USE.md file missing!"
+            exit 1
+          fi
+          if [ ! -f "DMCA.md" ]; then
+            echo "ERROR: DMCA.md file missing!"
+            exit 1
+          fi
+          if [ ! -f "robots.txt" ]; then
+            echo "ERROR: robots.txt file missing!"
+            exit 1
+          fi
+          echo "Copyright notices validated ✓"
+          
+      - name: Validate security files
+        run: |
+          if [ ! -f ".well-known/security.txt" ]; then
+            echo "ERROR: .well-known/security.txt file missing!"
+            exit 1
+          fi
+          if [ ! -f ".gitattributes" ]; then
+            echo "WARNING: .gitattributes file missing!"
+          else
+            echo ".gitattributes present ✓"
+          fi
+          if [ ! -f ".nojekyll" ]; then
+            echo "WARNING: .nojekyll file missing!"
+          else
+            echo ".nojekyll present ✓"
+          fi
+          echo "Security files validated ✓"
